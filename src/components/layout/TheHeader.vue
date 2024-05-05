@@ -14,14 +14,24 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
+import { RouteRecordName, useRoute, useRouter } from "vue-router";
+import { useLocaleStore } from "../../store/locale/index";
 import { useI18n } from "vue-i18n";
+const route = useRoute();
+const router = useRouter();
 const { locale } = useI18n();
-
+const localeStore = useLocaleStore();
 const selectedLang = ref<string>("");
 const changeLang = () => {
   locale.value = selectedLang.value;
+  localeStore.setLocale({ lang: locale.value });
+
+  router.replace({
+    name: route.name as RouteRecordName,
+    params: { lang: localeStore.currentLocale },
+  });
 };
 onMounted(() => {
-  selectedLang.value = "en";
+  selectedLang.value = localeStore.currentLocale;
 });
 </script>

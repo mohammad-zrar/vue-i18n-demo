@@ -13,7 +13,15 @@
 </template>
 
 <script setup lang="ts">
+import { onMounted } from "vue";
 import HelloWorld from "./components/HelloWorld.vue";
 import TheHeader from "./components/layout/TheHeader.vue";
 import PageNavigator from "./components/PageNavigator.vue";
+import { useLocaleStore } from "./store/locale";
+
+const localeStore = useLocaleStore();
+
+onMounted(() => {
+  localeStore.setLocale({ lang: "ar" });
+});
 </script>

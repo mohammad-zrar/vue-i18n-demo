@@ -5,18 +5,24 @@ export default createRouter({
   routes: [
     {
       path: "/",
-      name: "home",
-      redirect: { name: "page one" },
+      name: "root",
+      redirect: { name: "pageOne", params: { lang: "en" } },
     },
     {
-      path: "/page-one",
-      name: "page one",
-      component: () => import("../components/PageOne.vue"),
-    },
-    {
-      path: "/page-two",
-      name: "page two",
-      component: () => import("../components/PageTwo.vue"),
+      path: "/:lang",
+      name: "langRoot",
+      children: [
+        {
+          path: "page-one",
+          name: "pageOne",
+          component: () => import("../components/PageOne.vue"),
+        },
+        {
+          path: "page-two",
+          name: "pageTwo",
+          component: () => import("../components/PageTwo.vue"),
+        },
+      ],
     },
   ],
 });
