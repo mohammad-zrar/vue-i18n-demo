@@ -3,13 +3,13 @@
     <div class="rounded-lg flex items-center justify-center">
       <router-link
         class="cursor-pointer p-2 rounded-lg"
-        :to="`/${localeStore.currentLocale}/page-one`"
+        :to="`/${currentLocale}/page-one`"
         >Page One</router-link
       >
       <span class="border border-gray-400 h-8"></span>
       <router-link
         class="cursor-pointer p-2 items-center justify-center rounded-lg"
-        :to="`/${localeStore.currentLocale}/page-two`"
+        :to="`/${currentLocale}/page-two`"
         >Page Two</router-link
       >
     </div>
@@ -18,7 +18,9 @@
 
 <script lang="ts" setup>
 import { useLocaleStore } from "../store/locale";
+import { storeToRefs } from "pinia";
 const localeStore = useLocaleStore();
+const { currentLocale } = storeToRefs(localeStore);
 </script>
 
 <style scoped>

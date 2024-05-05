@@ -1,14 +1,8 @@
 import state from "./state";
 
 const actions = {
-  setLocale(payload: { lang: string }) {
-    if (
-      payload.lang === "en" ||
-      payload.lang === "ar" ||
-      payload.lang === "kr"
-    ) {
-      state.currentLocale = payload.lang;
-    }
+  setLocale(newLocale: string) {
+    state.currentLocale = newLocale;
   },
 };
 

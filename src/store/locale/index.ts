@@ -1,8 +1,12 @@
 import { defineStore } from "pinia";
 import state from "./state";
-import actions from "./actions";
+
 export const useLocaleStore = defineStore({
   id: "locale",
   state: () => state,
-  actions: actions,
+  actions: {
+    setLocale(newLocale: string) {
+      this.currentLocale = newLocale; // use 'this' to refer to store state
+    },
+  },
 });
