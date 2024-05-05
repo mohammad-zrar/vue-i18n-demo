@@ -13,7 +13,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, watch } from "vue";
+import { watch } from "vue";
 import { storeToRefs } from "pinia";
 import { RouteRecordName, useRoute, useRouter } from "vue-router";
 import { useLocaleStore } from "./store/locale";
@@ -39,7 +39,7 @@ watch(route, (newPath) => {
       const params = route.params;
       params.lang = localeStore.currentLocale;
       router.push({
-        name: "pageOne",
+        name: route.name as RouteRecordName,
         params: params,
       });
     }
