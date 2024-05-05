@@ -13,7 +13,30 @@
 </template>
 
 <script setup lang="ts">
+import { onMounted, watch } from "vue";
+import { storeToRefs } from "pinia";
+import { useRoute } from "vue-router";
+import { useLocaleStore } from "./store/locale";
+import { useI18n } from "vue-i18n";
 import HelloWorld from "./components/HelloWorld.vue";
 import TheHeader from "./components/layout/TheHeader.vue";
 import PageNavigator from "./components/PageNavigator.vue";
+
+const localeStore = useLocaleStore();
+const { currentLocale } = storeToRefs(localeStore);
+const { locale } = useI18n();
+const route = useRoute();
+
+onMounted(() => {});
+
+watch(route, (newPath) => {
+  if (newPath.params.lang !== currentLocale.value) {
+    try {
+      localeStore.setLocale(newPath.params.lang as string);
+      locale.value = localeStore.currentLocale;
+    } catch (err) {
+      console.log("err: ", err);
+    }
+  }
+});
 </script>

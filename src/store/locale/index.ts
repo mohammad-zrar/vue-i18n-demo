@@ -6,7 +6,7 @@ export const useLocaleStore = defineStore({
   state: () => state,
   actions: {
     setLocale(newLocale: string) {
-      this.currentLocale = newLocale; // use 'this' to refer to store state
+      this.currentLocale = newLocale;
     },
   },
 });
