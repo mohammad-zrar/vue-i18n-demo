@@ -15,7 +15,7 @@
 <script setup lang="ts">
 import { onMounted, watch } from "vue";
 import { storeToRefs } from "pinia";
-import { useRoute } from "vue-router";
+import { RouteRecordName, useRoute, useRouter } from "vue-router";
 import { useLocaleStore } from "./store/locale";
 import { useI18n } from "vue-i18n";
 import HelloWorld from "./components/HelloWorld.vue";
@@ -26,16 +26,22 @@ const localeStore = useLocaleStore();
 const { currentLocale } = storeToRefs(localeStore);
 const { locale } = useI18n();
 const route = useRoute();
+const router = useRouter();
 
-onMounted(() => {});
-
+// ROUTE WATCHER
 watch(route, (newPath) => {
   if (newPath.params.lang !== currentLocale.value) {
     try {
       localeStore.setLocale(newPath.params.lang as string);
       locale.value = localeStore.currentLocale;
     } catch (err) {
-      console.log("err: ", err);
+      console.error(err);
+      const params = route.params;
+      params.lang = localeStore.currentLocale;
+      router.push({
+        name: "pageOne",
+        params: params,
+      });
     }
   }
 });

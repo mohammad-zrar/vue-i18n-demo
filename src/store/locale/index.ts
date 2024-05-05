@@ -6,7 +6,17 @@ export const useLocaleStore = defineStore({
   state: () => state,
   actions: {
     setLocale(newLocale: string) {
-      this.currentLocale = newLocale;
+      if (["en", "kr", "ar"].includes(newLocale)) {
+        state.currentLocale = newLocale;
+      } else {
+        throw new Error("This language is not supported");
+      }
+    },
+    setDefault() {
+      state.currentLocale = "en";
+    },
+    testLocale(): void {
+      console.log("test");
     },
   },
 });

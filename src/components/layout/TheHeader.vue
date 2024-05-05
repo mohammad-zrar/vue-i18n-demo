@@ -18,11 +18,16 @@ import { useRouter, useRoute } from "vue-router";
 import { useI18n } from "vue-i18n";
 import { storeToRefs } from "pinia";
 
+// COMPOSABLES
 const route = useRoute();
 const router = useRouter();
 const localeStore = useLocaleStore();
+
+// REFS
 const { currentLocale } = storeToRefs(localeStore);
 const { locale } = useI18n();
+
+// ACTIONS
 const changeLang = () => {
   localeStore.setLocale(currentLocale.value);
   locale.value = localeStore.currentLocale;

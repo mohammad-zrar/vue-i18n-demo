@@ -11,6 +11,9 @@ const actions = {
   setDefault() {
     state.currentLocale = "en";
   },
+  testLocale(): void {
+    console.log("test");
+  },
 };
 
 export default actions;
